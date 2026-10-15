@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cantina ITR - Inscripción de Almuerzo</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Hoja de Estilos CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Menú Lateral Desplegable -->
+  <div id="drawer-backdrop" class="drawer-backdrop" onclick="toggleDrawer()"></div>
+  <aside id="side-drawer" class="side-drawer">
+    <div class="drawer-header">
+      <div class="drawer-brand">
+        <span class="badge-comedor">Comedor Renault</span>
+        <span class="brand-title">Cantina ITR</span>
+      </div>
+      <button class="drawer-close-btn" onclick="toggleDrawer()" title="Cerrar menú">
+        <i data-lucide="x" class="drawer-icon-close"></i>
+      </button>
+    </div>
+
+    <nav class="drawer-nav">
+      <a href="#" class="drawer-link active" onclick="toggleDrawer()">
+        <i data-lucide="utensils" class="drawer-link-icon"></i>
+        <span>Inscripción Menú</span>
+      </a>
+      <a href="#" class="drawer-link" onclick="openDrawerOption('Historial de Pedidos')">
+        <i data-lucide="history" class="drawer-link-icon"></i>
+        <span>Historial de Pedidos</span>
+      </a>
+      <a href="#" class="drawer-link" onclick="openFeedbackModal()">
+        <i data-lucide="message-square-warning" class="drawer-link-icon"></i>
+        <span>Quejas y Sugerencias</span>
+      </a>
+    </nav>
+
+    <div class="drawer-footer">
+      <span class="drawer-footer-text">Instituto Técnico Renault · 2026</span>
+    </div>
+  </aside>
+
+  <!-- Contenedor Principal -->
+  <div class="card-container">
+
+    <!-- Header Superior -->
+    <header class="app-header">
+      <div class="header-brand-group">
+        <div class="brand-badge-container">
+          <span class="badge-comedor">Comedor Renault</span>
+          <span class="brand-title">Cantina ITR</span>
+        </div>
+
+        <div class="divider-vertical"></div>
+
+        <!-- Logo Instituto Técnico Renault -->
+        <div class="school-logo">
+          <img src="logo.png" alt="Logo Renault" class="school-logo-img">
+          <div class="school-subtitle">INSTITUTO TÉCNICO</div>
+          <div class="school-title">RENAULT</div>
+        </div>
+      </div>
+
+      <!-- Menú Hamburguesa -->
+      <button class="menu-btn" onclick="toggleDrawer()" title="Menú">
+        <svg class="hamburger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Banner Azul Marino -->
+    <section class="banner-top">
+      <div class="banner-info">
+        <span class="banner-tag">Inscripcion de Almuerzo</span>
+        <h1 id="current-date-title" class="banner-heading">Menu del Dia: Viernes 9/10/2026</h1>
+        <p class="banner-subtext">Completa tus datos y reserva antes de las 10.00hs</p>
+      </div>
+
+      <div class="countdown-badge">
+        <i data-lucide="clock" class="icon-clock"></i>
+        <div class="countdown-text">
+          <div class="countdown-label">Plazo de reserva</div>
+          <div id="countdown" class="countdown-val">Cierra en 20 Min</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Columnas Independientes -->
+    <main class="main-columns">
+
+      <!-- COLUMNA IZQUIERDA -->
+      <div class="column">
+        
+        <!-- Tarjeta 1: Menú Principal -->
+        <div class="panel-card">
+          <div class="img-banner-box">
+            <img 
+              src="milanesa.png" 
+              alt="Milanesa con puré" 
+              class="banner-img"
+            />
+            <div class="banner-overlay">
+              <span class="overlay-tag">Plato Principal</span>
+              <h3 class="overlay-title">Milanesa con pure</h3>
+            </div>
+          </div>
+
+          <div class="menu-includes-section">
+            <h4 class="includes-heading">¿Que incluye este menu?</h4>
+            <div class="includes-grid">
+              <div class="sub-dish-card">
+                <img 
+                  src="tortilla.png" 
+                  alt="Tortilla de Papas" 
+                  class="sub-dish-img"
+                />
+                <div class="sub-dish-overlay">
+                  <span class="sub-tag">Entrada</span>
+                  <span class="sub-title">Tortilla de Papas:</span>
+                </div>
+              </div>
+
+              <div class="sub-dish-card">
+                <img 
+                  src="helado.png" 
+                  alt="Palito Bombón" 
+                  class="sub-dish-img"
+                />
+                <div class="sub-dish-overlay">
+                  <span class="sub-tag">Postre</span>
+                  <span class="sub-title">Palito Bombon:</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="total-price-bar">
+            <span class="price-bar-label">PRECIO TOTAL:</span>
+            <span class="price-bar-val">$10.000</span>
+          </div>
+        </div>
+
+        <!-- Tarjeta 3: Datos del Alumno -->
+        <div class="panel-card">
+          <div class="card-header-icon">
+            <div class="icon-circle">
+              <i data-lucide="user" class="section-icon"></i>
+            </div>
+            <h2 class="card-section-title uppercase tracking">DATOS DEL ALUMNO</h2>
+          </div>
+
+          <form id="order-form" class="student-form" onsubmit="event.preventDefault(); confirmOrder();">
+            <div class="form-group">
+              <label class="form-label">
+                Nombre y apellido <span class="required">*</span>
+              </label>
+              <input 
+                type="text" 
+                id="student_name" 
+                placeholder="Ej: Pereyra Juan" 
+                class="input-pill"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                Curso y division <span class="required">*</span>
+              </label>
+              <input 
+                type="text" 
+                id="student_course" 
+                placeholder="Ej: Quinto año Mecanica" 
+                class="input-pill"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                Aclaracion Dietaria
+              </label>
+              <input 
+                type="text" 
+                id="student_diet" 
+                placeholder="Ej: Celiaco" 
+                class="input-pill"
+              />
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- COLUMNA DERECHA -->
+      <div class="column">
+
+        <!-- Tarjeta 2: Método de Pago -->
+        <div class="panel-card">
+          <div class="card-header-icon">
+            <div class="icon-circle">
+              <i data-lucide="wallet" class="section-icon"></i>
+            </div>
+            <h2 class="card-section-title">Metodo de pago</h2>
+          </div>
+
+          <div class="payment-options-list">
+            <div id="option-transfer" onclick="selectPayment('transfer')" class="payment-card selected">
+              <div class="payment-card-top">
+                <div class="payment-meta">
+                  <div class="method-icon-box transfer-bg">
+                    <i data-lucide="arrow-left-right" class="method-icon"></i>
+                  </div>
+                  <div>
+                    <div class="method-name">Transferencia Inmediata</div>
+                    <div class="method-sub">Mercado Pago / Banco</div>
+                  </div>
+                </div>
+                <div id="radio-transfer" class="custom-radio selected">
+                  <i data-lucide="check" class="radio-check"></i>
+                </div>
+              </div>
+
+              <div id="alias-box" class="alias-container">
+                <span class="alias-label">ALIAS OFICIAL MP</span>
+                <div class="alias-pill">
+                  <span class="alias-code">CANTINAITR.MP</span>
+                  <button onclick="copyAlias(event)" id="copy-btn" class="copy-button">
+                    <i data-lucide="copy" class="btn-icon"></i>
+                    <span>Copiar</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div id="option-cash" onclick="selectPayment('cash')" class="payment-card unselected">
+              <div class="payment-card-top">
+                <div class="payment-meta">
+                  <div class="method-icon-box cash-bg">
+                    <i data-lucide="banknote" class="method-icon"></i>
+                  </div>
+                  <div>
+                    <div class="method-name">Pago en el comedor</div>
+                    <div class="method-sub">Efectivo o QR en Caja</div>
+                  </div>
+                </div>
+                <div id="radio-cash" class="custom-radio unselected"></div>
+              </div>
+              <p class="cash-hint">
+                💡 Podes pagar con billetes justos o escanear el QR
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 4: Resumen de Pedido -->
+        <div class="panel-card">
+          <h2 class="card-section-title-sub">Resumen de pedido</h2>
+
+          <div class="summary-details">
+            <div class="summary-row">
+              <span class="row-label bold">1 x Menu del Dia Completo</span>
+              <span class="row-val bold">$10.000</span>
+            </div>
+            <div class="summary-row font-sm">
+              <span class="row-label text-muted">Entrada y postre incluidos</span>
+              <span class="row-val free-tag">Gratis</span>
+            </div>
+            <div class="summary-row font-sm mt-1">
+              <span class="row-label text-muted">Modalidad:</span>
+              <span id="summary-payment" class="row-val font-semibold">Transferencia Inmediata</span>
+            </div>
+          </div>
+
+          <div class="total-summary-row">
+            <span class="total-label">Total a Pagar:</span>
+            <span class="total-val">$10.000</span>
+          </div>
+
+          <button 
+            type="button" 
+            onclick="confirmOrder()" 
+            class="btn-confirm-order"
+          >
+            <span class="btn-text">Confirmar Inscripción al Menú</span>
+            <i data-lucide="arrow-right" class="btn-arrow"></i>
+          </button>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Footer Negro -->
+    <footer class="app-footer">
+      <div class="footer-content">
+        <div class="footer-brand-line">
+          <span class="footer-title">Cantina del Instituto Tecnico Renault</span>
+        </div>
+        <p class="footer-subtext">Gestión y reserva de almuerzos diarios para la comunidad educativa · Córdoba</p>
+        <div class="footer-links-row">
+          <span>Horario de atención: 07:30 a 14:30hs</span>
+          <span class="footer-dot">·</span>
+          <span>Atención Comedor ITR</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modal Emergente Moderno (Confirmación de Inscripción) -->
+  <div id="custom-modal" class="modal-backdrop" style="display: none;">
+    <div class="modal-box">
+      <div class="modal-badge-icon">
+        <i data-lucide="check" class="check-large"></i>
+      </div>
+      <div class="badge-mini">Comedor Renault · Cantina ITR</div>
+      <h3 class="modal-title">¡Inscripción Exitosa!</h3>
+      <p class="modal-description">Tu reserva para el menú del día ha sido registrada con éxito.</p>
+
+      <div class="modal-summary-card">
+        <div class="modal-line">
+          <span class="modal-lbl">Alumno:</span>
+          <span id="m-name" class="modal-txt"></span>
+        </div>
+        <div class="modal-line">
+          <span class="modal-lbl">Curso y división:</span>
+          <span id="m-course" class="modal-txt"></span>
+        </div>
+        <div class="modal-line">
+          <span class="modal-lbl">Aclaración Dietaria:</span>
+          <span id="m-diet" class="modal-txt"></span>
+        </div>
+        <div class="modal-line">
+          <span class="modal-lbl">Método de pago:</span>
+          <span id="m-payment" class="modal-txt font-dark"></span>
+        </div>
+        <div class="modal-line total-line">
+          <span class="modal-lbl font-bold">Total a pagar:</span>
+          <span class="total-number">$10.000</span>
+        </div>
+      </div>
+
+      <button type="button" onclick="closeCustomModal()" class="modal-btn-confirm">
+        Aceptar y Volver
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal Emergente: Quejas y Sugerencias -->
+  <div id="feedback-modal" class="modal-backdrop" style="display: none;">
+    <div class="modal-box feedback-box">
+      <div class="feedback-modal-header">
+        <div class="feedback-header-left">
+          <div class="feedback-icon-box">
+            <i data-lucide="message-square" class="feedback-head-icon"></i>
+          </div>
+          <div>
+            <h3 class="modal-title text-left">Buzón de Mensajes</h3>
+            <p class="modal-description text-left no-margin">Cantina del Instituto Técnico Renault</p>
+          </div>
+        </div>
+        <button class="drawer-close-btn" onclick="closeFeedbackModal()" title="Cerrar">
+          <i data-lucide="x" class="drawer-icon-close"></i>
+        </button>
+      </div>
+
+      <!-- Selector de Tipo: Queja o Sugerencia -->
+      <div class="feedback-type-toggle">
+        <button type="button" id="type-btn-queja" class="toggle-btn active" onclick="setFeedbackType('queja')">
+          <i data-lucide="alert-triangle" class="toggle-icon"></i>
+          <span>Queja</span>
+        </button>
+        <button type="button" id="type-btn-sugerencia" class="toggle-btn" onclick="setFeedbackType('sugerencia')">
+          <i data-lucide="lightbulb" class="toggle-icon"></i>
+          <span>Sugerencia</span>
+        </button>
+      </div>
+
+      <!-- Formulario de Queja / Sugerencia -->
+      <form id="feedback-form" onsubmit="event.preventDefault(); submitFeedback();" class="student-form feedback-form">
+        <div class="form-group">
+          <label class="form-label" for="feedback_student">
+            Nombre del alumno o curso <span class="text-muted font-normal">(opcional)</span>
+          </label>
+          <input 
+            type="text" 
+            id="feedback_student" 
+            placeholder="Ej: Pereyra Juan (5to Mecánica)" 
+            class="input-pill"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="feedback_message" id="feedback-message-label">
+            Detalle de tu Queja <span class="required">*</span>
+          </label>
+          <textarea 
+            id="feedback_message" 
+            rows="4" 
+            placeholder="Contanos lo que ocurrió o qué podemos mejorar..." 
+            class="textarea-box"
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" id="feedback-submit-btn" class="modal-btn-confirm">
+          Enviar queja
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
