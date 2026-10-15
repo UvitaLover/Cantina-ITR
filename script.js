@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
   actualizarFechaBanner();
 });
 
-// Función para abrir y cerrar el menú lateral
+// ==========================================================================
+// GESTIÓN DEL MENÚ LATERAL (DRAWER)
+// ==========================================================================
 function toggleDrawer() {
   const drawer = document.getElementById('side-drawer');
   const backdrop = document.getElementById('drawer-backdrop');
@@ -18,10 +20,85 @@ function toggleDrawer() {
   }
 }
 
-// Acción al tocar una opción del menú lateral
 function openDrawerOption(optionName) {
   toggleDrawer();
   alert(`Sección "${optionName}" en desarrollo.`);
+}
+
+// ==========================================================================
+// GESTIÓN DE HISTORIAL DE PEDIDOS (LOCALSTORAGE)
+// ==========================================================================
+function openHistoryModal() {
+  toggleDrawer();
+  renderHistoryList();
+  document.getElementById('history-modal').style.display = 'flex';
+  
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
+}
+
+function closeHistoryModal() {
+  document.getElementById('history-modal').style.display = 'none';
+}
+
+function getStoredOrders() {
+  const data = localStorage.getItem('cantina_itr_pedidos');
+  return data ? JSON.parse(data) : [];
+}
+
+function saveOrderToHistory(order) {
+  const orders = getStoredOrders();
+  orders.unshift(order); // agrega al principio
+  localStorage.setItem('cantina_itr_pedidos', JSON.stringify(orders));
+}
+
+function renderHistoryList() {
+  const container = document.getElementById('history-list-container');
+  const clearBtn = document.getElementById('history-clear-btn');
+  const orders = getStoredOrders();
+
+  if (!container) return;
+
+  if (orders.length === 0) {
+    clearBtn.style.display = 'none';
+    container.innerHTML = `
+      <div class="history-empty-state">
+        <i data-lucide="calendar-x" class="history-empty-icon"></i>
+        <span class="history-empty-title">No hay pedidos registrados todavía</span>
+        <span class="history-empty-desc">Tus pedidos confirmados aparecerán acá con su fecha y detalle.</span>
+      </div>
+    `;
+  } else {
+    clearBtn.style.display = 'flex';
+    container.innerHTML = orders.map((o) => `
+      <div class="history-card">
+        <div class="history-card-top">
+          <span class="history-date">${o.fecha}</span>
+          <span class="history-price">$10.000</span>
+        </div>
+        <div class="history-item-title">${o.menu}</div>
+        <div class="history-meta-row">
+          <span>${o.alumno} · ${o.curso}</span>
+          <span class="history-badge-status">
+            <i data-lucide="check" style="width: 13px; height: 13px; stroke-width: 3;"></i>
+            ${o.modalidad}
+          </span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
+}
+
+function clearHistory() {
+  if (confirm("¿Estás seguro de que deseas borrar todo el historial de pedidos?")) {
+    localStorage.removeItem('cantina_itr_pedidos');
+    renderHistoryList();
+  }
 }
 
 // ==========================================================================
@@ -186,7 +263,7 @@ function copyAlias(event) {
 }
 
 // ==========================================================================
-// CONFIRMACIÓN DE PEDIDO
+// CONFIRMACIÓN DE PEDIDO Y GUARDADO EN HISTORIAL
 // ==========================================================================
 function confirmOrder() {
   const nameInput = document.getElementById('student_name');
@@ -203,6 +280,24 @@ function confirmOrder() {
     return;
   }
 
+  const paymentDesc = currentMethod === 'transfer' 
+    ? 'Transferencia Inmediata' 
+    : 'Pago en el comedor';
+
+  // Guardar en el historial local
+  const hoy = new Date();
+  const fechaStr = `${hoy.getDate()}/${hoy.getMonth() + 1}/${hoy.getFullYear()} · ${hoy.getHours().toString().padStart(2, '0')}:${hoy.getMinutes().toString().padStart(2, '0')}hs`;
+
+  saveOrderToHistory({
+    fecha: fechaStr,
+    alumno: name,
+    curso: course,
+    dieta: diet || 'Ninguna',
+    modalidad: paymentDesc,
+    menu: 'Menú Completo: Milanesa con puré'
+  });
+
+  // Mostrar datos en el modal de confirmación
   document.getElementById('m-name').innerText = name;
   document.getElementById('m-course').innerText = course;
   document.getElementById('m-diet').innerText = diet ? diet : 'Ninguna';
