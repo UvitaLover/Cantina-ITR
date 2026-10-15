@@ -33,7 +33,7 @@
         <i data-lucide="utensils" class="drawer-link-icon"></i>
         <span>Inscripción Menú</span>
       </a>
-      <a href="#" class="drawer-link" onclick="openDrawerOption('Historial de Pedidos')">
+      <a href="#" class="drawer-link" onclick="openHistoryModal()">
         <i data-lucide="history" class="drawer-link-icon"></i>
         <span>Historial de Pedidos</span>
       </a>
@@ -416,6 +416,41 @@
           Enviar queja
         </button>
       </form>
+    </div>
+  </div>
+
+  <!-- Modal Emergente: Historial de Pedidos -->
+  <div id="history-modal" class="modal-backdrop" style="display: none;">
+    <div class="modal-box history-box">
+      <div class="feedback-modal-header">
+        <div class="feedback-header-left">
+          <div class="feedback-icon-box history-icon-bg">
+            <i data-lucide="history" class="feedback-head-icon"></i>
+          </div>
+          <div>
+            <h3 class="modal-title text-left">Historial de Pedidos</h3>
+            <p class="modal-description text-left no-margin">Tus reservas registradas en este dispositivo</p>
+          </div>
+        </div>
+        <button class="drawer-close-btn" onclick="closeHistoryModal()" title="Cerrar">
+          <i data-lucide="x" class="drawer-icon-close"></i>
+        </button>
+      </div>
+
+      <!-- Lista de pedidos guardados -->
+      <div id="history-list-container" class="history-list">
+        <!-- Renderizado dinámicamente desde script.js -->
+      </div>
+
+      <div class="history-footer-actions">
+        <button type="button" onclick="clearHistory()" class="history-btn-clear" id="history-clear-btn">
+          <i data-lucide="trash-2" class="btn-icon"></i>
+          <span>Borrar historial</span>
+        </button>
+        <button type="button" onclick="closeHistoryModal()" class="modal-btn-confirm history-btn-close">
+          Cerrar
+        </button>
+      </div>
     </div>
   </div>
 
